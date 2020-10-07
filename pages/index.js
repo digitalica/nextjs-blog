@@ -4,10 +4,10 @@ import Date from '../components/date'
 import Counter from '../components/counter'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
-import { getSortedPostsData } from '../lib/posts'
+import { getSortedCanopyData, getSortedPostsData } from '../lib/posts'
 
 
-export default function Home({ allPostsData }) {
+export default function Home({ allPostsData, allCanopiesData }) {
   return (
     <Layout home>
       <Head>
@@ -38,6 +38,21 @@ export default function Home({ allPostsData }) {
           ))}
         </ul>
       </section>
+
+      <section>
+        <ul className={utilStyles.list}>
+          {allCanopiesData.map(({slug, name, displaycategory, manufacturername}) => (
+            <li className={utilStyles.listItem} key={slug}>
+              {name}
+              <br />
+              <small className={utilStyles.lightText}>
+                {manufacturername}
+              </small>
+            </li>
+          ))}
+        </ul>
+      </section>
+
     </Layout>
   )
 }
@@ -45,9 +60,12 @@ export default function Home({ allPostsData }) {
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData()
+  const allCanopiesData = getSortedCanopyData()
+  console.log(allCanopiesData)
   return {
     props: {
-      allPostsData
+      allPostsData,
+      allCanopiesData
     }
   }
 }
