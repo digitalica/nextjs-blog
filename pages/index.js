@@ -4,7 +4,8 @@ import Date from '../components/date'
 import Counter from '../components/counter'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
-import { getSortedCanopyData, getSortedPostsData } from '../lib/posts'
+import { getSortedPostsData } from '../lib/posts'
+import { getSortedCanopyData } from '../lib/canopies'
 
 
 export default function Home({ allPostsData, allCanopiesData }) {
@@ -14,7 +15,6 @@ export default function Home({ allPostsData, allCanopiesData }) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Hello, I'm Robbert, testing Nextjs, to maybe use for the Skydive Kompasroos!</p>
         <p>
           (This is a sample website - you’ll be building a site like this on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
@@ -41,12 +41,12 @@ export default function Home({ allPostsData, allCanopiesData }) {
 
       <section>
         <ul className={utilStyles.list}>
-          {allCanopiesData.map(({slug, name, displaycategory, manufacturername}) => (
+          {allCanopiesData.map(({slug, name, displaycategory, manufacturername, manufacturerslug}) => (
             <li className={utilStyles.listItem} key={slug}>
-              {name}
+              <Link href={`/canopies/${slug}`}><a>{name}</a></Link>
               <br />
               <small className={utilStyles.lightText}>
-                {manufacturername}
+              <Link href={`/manufacturers/${manufacturerslug}`}><a>{manufacturername}</a></Link>
               </small>
             </li>
           ))}
