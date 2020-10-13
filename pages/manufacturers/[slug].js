@@ -6,6 +6,12 @@ export default function Post({ postData }) {
   return <Layout>
       <Head>
         <title>{postData.name}</title>
+        <meta name="og:title" content={"Skydive kompasroos " + postData.name } />
+
+        <meta
+          name="description"
+          content={"Canopy manufacturer " +postData.name}
+        />
       </Head>
       <article>
       {postData.name}
